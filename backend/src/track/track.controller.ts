@@ -1,18 +1,16 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('/tracks')
-
 export class TrackController {
-  create(){}
+  // create() {}
 
   @Get()
-  getAll(){
-    return 'all tracks'
+  getAll() {
+    return 'all tracks';
   }
 
-
-  getOne(){
-    return 'dad'
+  getOne() {
+    return 'dad';
   }
-  delete(){}
+  // delete() {}
 }

@@ -1,25 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class TrackEntity{
+export class TrackEntity {
   @PrimaryGeneratedColumn()
-  id:number;
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  musician: string
+  musician: string;
 
   @Column()
-  description: string
+  description: string;
 
-  @Column({name:'picture', type:'bytea',nullable:true })
+  @Column({ name: 'picture', type: 'bytea', nullable: true })
   picture: Buffer;
 
-  @Column({ type: 'bytea',name:'audio',nullable:true })
+  @Column({ type: 'bytea', name: 'audio', nullable: true })
   audio: Uint8Array;
 
   @Column()
-  listens: number
+  listens: number;
 }
