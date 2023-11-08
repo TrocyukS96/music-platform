@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { TrackEntity } from 'src/track/entities/track.entity';
+import { Track } from 'src/track/entities/track.entity';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -39,13 +39,10 @@ class ConfigService {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-
-      entities: [TrackEntity],
-
+      entities: [Track],
       migrationsTableName: 'migration',
-
       migrations: ['src/migration/*.ts'],
-
+      synchronize: true,
       ssl: this.isProduction(),
     };
   }

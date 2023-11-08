@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class TrackEntity {
+export class Track {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,12 +14,12 @@ export class TrackEntity {
   @Column()
   description: string;
 
-  @Column({ name: 'picture', type: 'bytea', nullable: true })
-  picture: Buffer;
+  // @Column({ name: 'picture', type: 'bytea', nullable: true })
+  // picture: Buffer;
 
-  @Column({ type: 'bytea', name: 'audio', nullable: true })
-  audio: Uint8Array;
+  // @Column({ type: 'bytea', name: 'audio', nullable: true })
+  // audio: Uint8Array;
 
-  @Column()
-  listens: number;
+  // @Column()
+  // listens: number;
 }
