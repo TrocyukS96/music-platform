@@ -14,8 +14,8 @@ export class Track {
   @Column()
   description: string;
 
-  // @Column({ name: 'picture', type: 'bytea', nullable: true })
-  // picture: Buffer;
+  @Column({ name: 'picture', type: 'bytea', nullable: true })
+  picture: File;
 
   // @Column({ type: 'bytea', name: 'audio', nullable: true })
   // audio: Uint8Array;

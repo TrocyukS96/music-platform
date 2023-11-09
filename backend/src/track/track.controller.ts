@@ -1,13 +1,27 @@
-import { Body, Controller, Get, Post, Delete, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-user.dto';
 import { TrackService } from './track.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('/tracks')
 export class TrackController {
   constructor(private trackService: TrackService) {}
   @Post()
-  async create(@Body() createTrackDto: CreateTrackDto) {
-    return this.trackService.createTrack(createTrackDto);
+  @UseInterceptors(FileInterceptor('picture'))
+  async create(
+    @Body() createTrackDto: CreateTrackDto,
+    @UploadedFile() picture: Express.Multer.File,
+  ) {
+    return this.trackService.createTrack(createTrackDto, picture);
   }
 
   @Get()
@@ -15,9 +29,13 @@ export class TrackController {
     return this.trackService.getTracks();
   }
 
+  @Get(':id')
+  getOne(@Param('id') id: string) {
+    return this.trackService.getTrack(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.trackService.deleteTrack(id);
   }
-  // delete() {}
 }

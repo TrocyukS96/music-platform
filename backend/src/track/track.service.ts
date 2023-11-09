@@ -10,9 +10,13 @@ export class TrackService {
     @InjectRepository(Track)
     private trackRepository: Repository<Track>,
   ) {}
-  async createTrack(createTrackDto: CreateTrackDto) {
+  async createTrack(
+    createTrackDto: CreateTrackDto,
+    picture: Express.Multer.File,
+  ) {
     try {
-      const data = await this.trackRepository.save(createTrackDto);
+      const sendData = { ...createTrackDto, picture };
+      const data = await this.trackRepository.save(sendData);
       return JSON.stringify(data);
     } catch (e) {
       console.log(e);
@@ -21,6 +25,13 @@ export class TrackService {
   async getTracks() {
     try {
       return await this.trackRepository.find();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async getTrack(id: number) {
+    try {
+      return await this.trackRepository.findOne({ where: { id } });
     } catch (e) {
       console.log(e);
     }
