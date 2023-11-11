@@ -1,20 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-user.dto';
-import { Track } from './entities/track.entity';
+import { Tracks } from './entities/tracks.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TrackService {
   constructor(
-    @InjectRepository(Track)
-    private trackRepository: Repository<Track>,
+    @InjectRepository(Tracks)
+    private trackRepository: Repository<Tracks>,
   ) {}
   async createTrack(
     createTrackDto: CreateTrackDto,
     picture: Express.Multer.File,
   ) {
     try {
+      console.log(picture, '---picture');
       const sendData = { ...createTrackDto, picture };
       const data = await this.trackRepository.save(sendData);
       return JSON.stringify(data);

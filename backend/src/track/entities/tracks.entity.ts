@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Pictures } from 'src/files/entities/pictures.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Track {
+export class Tracks {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,8 +15,8 @@ export class Track {
   @Column()
   description: string;
 
-  @Column({ name: 'picture', type: 'bytea', nullable: true })
-  picture: File;
+  @OneToOne(() => Pictures, (pictures) => pictures.id)
+  pictureId: number;
 
   // @Column({ type: 'bytea', name: 'audio', nullable: true })
   // audio: Uint8Array;
