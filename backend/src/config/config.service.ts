@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Pictures } from 'src/files/entities/pictures.entity';
 import { Tracks } from 'src/track/entities/tracks.entity';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -33,13 +34,12 @@ class ConfigService {
   public getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
-
       host: this.getValue('POSTGRES_HOST'),
       port: parseInt(this.getValue('POSTGRES_PORT')),
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      entities: [Tracks],
+      entities: [Tracks, Pictures],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
       synchronize: true,

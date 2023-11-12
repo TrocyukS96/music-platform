@@ -5,7 +5,7 @@ export class Pictures {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @PrimaryGeneratedColumn()
+  @Column()
   createdAt: Date;
 
   @Column()
@@ -18,5 +18,5 @@ export class Pictures {
   size: number;
 
   @Column()
-  data: Blob;
+  data: string;
 }
