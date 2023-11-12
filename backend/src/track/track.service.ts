@@ -16,12 +16,16 @@ export class TrackService {
   async createTrack(
     createTrackDto: CreateTrackDto,
     picture: Express.Multer.File,
+    audio: Express.Multer.File,
   ) {
     try {
       const pictureData = await this.filesService.savePicture(picture);
+      const audioData = await this.filesService.saveAudio(audio);
+      console.log(audioData, '--audioData');
       const sendData = {
         ...createTrackDto,
         picture: pictureData?.data,
+        audio: JSON.stringify(audioData),
         createdAt: getDate(),
       };
       const data = await this.trackRepository.save(sendData);

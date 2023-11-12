@@ -20,6 +20,9 @@ export class Tracks {
   @Column()
   picture: string;
 
+  @Column()
+  audio: string;
+
   // @Column({ type: 'bytea', name: 'audio', nullable: true })
   // audio: Uint8Array;
 
