@@ -9,7 +9,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { CreateTrackDto } from './dto/create-user.dto';
+import { CreateTrackDto } from './dto/create-track.dto';
 import { TrackService } from './track.service';
 
 @Controller('/tracks')

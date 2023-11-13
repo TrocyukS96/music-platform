@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Audio_Entity } from 'src/files/entities/audio.entity';
 import { Pictures } from 'src/files/entities/pictures.entity';
 import { Tracks } from 'src/track/entities/tracks.entity';
+import { Users } from 'src/users/entities/users.entity';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -40,7 +41,7 @@ class ConfigService {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
-      entities: [Tracks, Pictures, Audio_Entity],
+      entities: [Tracks, Pictures, Audio_Entity, Users],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
       synchronize: true,

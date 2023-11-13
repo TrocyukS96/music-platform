@@ -22,10 +22,4 @@ export class Tracks {
 
   @Column()
   audio: string;
-
-  // @Column({ type: 'bytea', name: 'audio', nullable: true })
-  // audio: Uint8Array;
-
-  // @Column()
-  // listens: number;
 }

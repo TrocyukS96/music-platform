@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTrackDto } from './dto/create-user.dto';
+import { CreateTrackDto } from './dto/create-track.dto';
 import { Tracks } from './entities/tracks.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
