@@ -3,7 +3,7 @@ import { CreateTrackDto } from './dto/create-track.dto';
 import { Tracks } from './entities/tracks.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FilesService } from 'src/files/files.service';
+import { FileTypes, FilesService } from 'src/files/files.service';
 import { getDate } from 'src/helpers/get-date';
 
 @Injectable()
@@ -19,13 +19,12 @@ export class TrackService {
     audio: Express.Multer.File,
   ) {
     try {
-      const pictureData = await this.filesService.savePicture(picture);
-      const audioData = await this.filesService.saveAudio(audio);
-      console.log(audioData, '--audioData');
+      // const pictureData = await this.filesService.savePicture(picture);
+      // const audioData = await this.filesService.saveAudio(audio);
       const sendData = {
         ...createTrackDto,
-        picture: pictureData?.data,
-        audio: JSON.stringify(audioData),
+        picture: this.filesService.createFile(FileTypes.IMAGE, picture),
+        audio: this.filesService.createFile(FileTypes.AUDIO, audio),
         createdAt: getDate(),
       };
       const data = await this.trackRepository.save(sendData);
