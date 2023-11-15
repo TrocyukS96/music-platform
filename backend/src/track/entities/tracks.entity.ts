@@ -22,4 +22,7 @@ export class Tracks {
 
   @Column()
   audio: string;
+
+  @Column()
+  listens: number;
 }
