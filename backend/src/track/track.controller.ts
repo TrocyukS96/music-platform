@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   UploadedFiles,
+  Query,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
@@ -37,8 +38,8 @@ export class TrackController {
     );
   }
   @Get()
-  getAll() {
-    return this.trackService.getTracks();
+  getAll(@Query('query') query: string) {
+    return this.trackService.getTracks(query);
   }
 
   @Get(':id')
@@ -49,5 +50,10 @@ export class TrackController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.trackService.deleteTrack(id);
+  }
+
+  @Post('/listen/:id')
+  listen(@Param('id') id: number) {
+    return this.trackService.listenTrack(id);
   }
 }

@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { Tracks } from './entities/tracks.entity';
-import { Repository } from 'typeorm';
+import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FileTypes, FilesService } from 'src/files/files.service';
 import { getDate } from 'src/helpers/get-date';
-
 @Injectable()
 export class TrackService {
   constructor(
@@ -19,12 +18,11 @@ export class TrackService {
     audio: Express.Multer.File,
   ) {
     try {
-      // const pictureData = await this.filesService.savePicture(picture);
-      // const audioData = await this.filesService.saveAudio(audio);
       const sendData = {
         ...createTrackDto,
         picture: this.filesService.createFile(FileTypes.IMAGE, picture),
         audio: this.filesService.createFile(FileTypes.AUDIO, audio),
+        listens: 0,
         createdAt: getDate(),
       };
       const data = await this.trackRepository.save(sendData);
@@ -33,9 +31,16 @@ export class TrackService {
       console.log(e);
     }
   }
-  async getTracks() {
+  async getTracks(query: string) {
     try {
-      return await this.trackRepository.find();
+      console.log(query);
+      if (query) {
+        return await this.trackRepository.findBy({
+          name: Like(`%${query}`),
+        });
+      } else {
+        return await this.trackRepository.find();
+      }
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +60,15 @@ export class TrackService {
       console.log(e);
     }
   }
-  // async getAll() {}
-  // async getOne() {}
-  // async delete() {}
+  async listenTrack(id: number) {
+    try {
+      const track = await this.trackRepository.findOne({ where: { id } });
+      if (track) {
+        track.listens += 1;
+        return await this.trackRepository.save(track);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
