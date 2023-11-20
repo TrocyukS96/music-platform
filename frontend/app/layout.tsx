@@ -2,7 +2,7 @@ import { Flex } from "@radix-ui/themes";
 import '@radix-ui/themes/styles.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
 import Header from "./components/header/Header";
 
