@@ -1,7 +1,9 @@
-export default function TracksPage() {
+import React from 'react'
+
+const Tracks = () => {
   return (
-    <main >
-        tracks page
-    </main>
+    <div>Tracks</div>
   )
 }
+
+export default Tracks
