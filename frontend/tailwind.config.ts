@@ -15,6 +15,9 @@ const config: Config = {
       },
       height:{
         'content-height':'calc(100vh - 48px);'
+      },
+      gridTemplateColumns:{
+        'header':'1fr 100px'
       }
     },
   },
