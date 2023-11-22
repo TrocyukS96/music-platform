@@ -1,8 +1,15 @@
-import React from 'react'
+import { Heading } from '@radix-ui/themes';
+import "@radix-ui/themes/styles.css";
+import TrackList from '../components/trackList/TrackList';
+
+const list = [1,1,1,1]
 
 const Tracks = () => {
   return (
-    <div>Треки</div>
+    <div>
+      <Heading >Треки</Heading>
+      <TrackList/>
+    </div>
   )
 }
 

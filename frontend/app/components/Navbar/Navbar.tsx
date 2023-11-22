@@ -19,7 +19,6 @@ const pathNames = [
 
 const Navbar = () => {
   const currentPath = usePathname();
-  console.log(currentPath);
   return (
     <div className="w-60 p-2 bg-neutral-900 p-x-1">
       <Flex align="center" gap="3" justify="between">

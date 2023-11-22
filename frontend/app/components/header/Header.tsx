@@ -1,12 +1,12 @@
 'use client'
-import { Button, Grid, TextField } from "@radix-ui/themes";
-import { CiSearch } from "react-icons/ci";
+import { Button, TextField } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
+import { CiSearch } from "react-icons/ci";
 
 const Header = () => {
   return (
     <header className="h-12 p-2 bg-slate-300" >
-      <Grid columns="2" width="auto" className="grid-cols-header gap-2" >
+      <div className="grid  grid-cols-header gap-2" >
         <TextField.Root className="px-1 rounded-md">
           <TextField.Slot>
             <CiSearch />
@@ -16,7 +16,7 @@ const Header = () => {
         <Button variant="classic" color="indigo" className="rounded-md h-8">
           Войти
         </Button>
-      </Grid>
+      </div>
     </header>
   );
 };
