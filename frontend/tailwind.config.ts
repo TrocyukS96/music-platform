@@ -1,3 +1,4 @@
+import { radixThemePreset } from 'radix-themes-tw'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {

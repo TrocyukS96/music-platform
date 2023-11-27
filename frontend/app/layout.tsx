@@ -1,5 +1,5 @@
-import { Flex } from "@radix-ui/themes";
-import '@radix-ui/themes/styles.css';
+import { Flex, Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
@@ -20,17 +20,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} h-screen`}>
-        <Flex gap="3" width={'100%'} className="h-screen ">
-            <Navbar/>
+        <body className={`${inter.className} h-screen`}>
+        <Theme appearance="light">
+          <Flex gap="3" width={"100%"} className="h-screen">
+            <Navbar />
             <div className="w-full">
-              <Header/>
+              <Header />
               <main className="p-2 bg-stone-100 h-content-height">
                 {children}
               </main>
             </div>
-        </Flex>
-      </body>
+          </Flex>
+          </Theme>
+        </body>
     </html>
   );
 }

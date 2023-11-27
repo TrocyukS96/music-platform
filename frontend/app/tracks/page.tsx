@@ -7,7 +7,7 @@ const list = [1,1,1,1]
 const Tracks = () => {
   return (
     <div>
-      <Heading >Треки</Heading>
+      <Heading className='mt-2'>Треки</Heading>
       <TrackList/>
     </div>
   )
