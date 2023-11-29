@@ -10,7 +10,6 @@ const Tracks = () => {
           <Heading>Треки</Heading>
           <UploadTrack/>
       </Flex>
-      
       <TrackList/>
     </div>
   )

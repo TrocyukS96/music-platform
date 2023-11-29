@@ -73,13 +73,13 @@ const UploadButton: FC<IUPlodButtonProps> = (props) => {
     } else return undefined;
   };
   return (
-    <div className="upload-button-wrapper">
+    <div className="">
       <input
         ref={externalRef ? externalRef : ref}
         id="file"
         type="file"
         accept={getAcceptExtensions()}
-        className="file"
+        className="opacity-0 h-0 w-0"
         onChange={handleFileChange}
       />
       <Button 

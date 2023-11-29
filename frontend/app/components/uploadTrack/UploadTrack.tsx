@@ -1,50 +1,72 @@
-'use client'
-import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
-import React from "react";
+"use client";
+import {
+  Button,
+  Dialog,
+  Flex,
+  Separator,
+  Text,
+  TextArea,
+  TextField,
+} from "@radix-ui/themes";
+import React, { useRef } from "react";
+import TrackPhone from "./TrackPhone";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ICreateTrackForm } from "./types";
 
 const UploadTrack = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isDirty, isValid },
+    reset
+  } = useForm<ICreateTrackForm>();
+  const formRef = useRef<any>(null);
+
+  const onSubmit: SubmitHandler<ICreateTrackForm> = (data) => {
+    reset();
+  };
+
   return (
     <div>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Button variant="ghost" className="mr-20">Загрузить</Button>
+          <Button variant="ghost" className="mr-20">
+            Загрузить
+          </Button>
         </Dialog.Trigger>
-
         <Dialog.Content style={{ maxWidth: 450 }}>
           <Dialog.Title>Загрузка нового трека</Dialog.Title>
-
-
-          <Flex direction="column" gap="3">
+          <TrackPhone />
+          <form 
+          className="flex flex-col gap-2 mt-2"
+          onSubmit={handleSubmit(onSubmit)}
+          ref={formRef}
+          action={"#"}
+          >
             <label>
               <Text as="div" size="2" mb="1" weight="bold">
-                Name
+                Название трека
               </Text>
-              <TextField.Input
-                defaultValue="Freja Johnsen"
-                placeholder="Enter your full name"
-              />
+              <TextField.Input {...register("name", { required: true })}/>
             </label>
             <label>
               <Text as="div" size="2" mb="1" weight="bold">
-                Email
+                Описание к треку
               </Text>
-              <TextField.Input
-                defaultValue="freja@example.com"
-                placeholder="Enter your email"
-              />
+              <TextArea {...register("description", { required: true })}/>
             </label>
-          </Flex>
-
-          <Flex gap="3" mt="4" justify="end">
+            <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
-              <Button variant="soft" color="gray">
-                Cancel
+              <Button variant="soft" color="gray" onClick={(e)=>e.preventDefault()}>
+                Отменить
               </Button>
             </Dialog.Close>
             <Dialog.Close>
-              <Button>Save</Button>
+              <Button disabled={!isValid} type="submit">Сохранить</Button>
             </Dialog.Close>
           </Flex>
+          </form>
         </Dialog.Content>
       </Dialog.Root>
     </div>

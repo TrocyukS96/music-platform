@@ -1,8 +1,11 @@
 "use client";
 import { IUploadFile } from "@/app/types/general";
-import { Flex } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import Image from "next/image";
 import React, { useState, useRef } from "react";
+import UploadButton from "../uploadButton/UploadButton";
+import defaultImg from './../../../public/default-picture.png'
+import { getValidText } from "@/app/services/get-validText";
 
 const TrackPhone = () => {
   const [resetUploadTrigger, setResetUploadTrigger] = useState(1);
@@ -11,7 +14,7 @@ const TrackPhone = () => {
   const isPresentFile = file && Object.keys(file)?.length > 0;
   const isPresentView = file?.view !== undefined && file?.view?.length > 0;
   const isPresentName = file?.name !== undefined && file?.name?.length > 0;
-  const imgSrc = isPresentView ? file?.view : "";
+  const imgSrc = isPresentView ? file?.view : defaultImg;
 
   const uploadHandler = (data: IUploadFile) => {
     setFile(data);
@@ -29,30 +32,41 @@ const TrackPhone = () => {
   };
 
   return (
-    <Flex gap={'2'} justify={'center'}>
-      <div>
+    <Flex gap={'2'} justify={'between'} align={'center'}>
+      <div >
         {isPresentFile ? (
           <Image
-            src={""}
-            width={80}
-            height={80}
+            src={getValidText(imgSrc)}
+            width={96}
+            height={96}
             alt="default photo"
-            className="cursor-pointer photo-upload-img"
+            className="object-cover w-24 h-24 rounded-xl"
           />
         ) : (
           <div className="blue-secondary-bg photo-default-img">
             <Image
-              src={""}
-              width={80}
-              height={80}
+              src={getValidText(imgSrc)}
+              width={96}
+              height={96}
               alt="default photo"
-              className="cursor-pointer photo-upload-img"
+              className="object-cover w-24 h-24 rounded-xl"
             />
           </div>
         )}
       </div>
       <div>
-
+      {isPresentFile ? (
+          <Button onClick={deleteHandler}>
+            Удалить
+          </Button>
+        ) : (
+          <UploadButton
+            title={'Загрузить'}
+            onChange={uploadHandler}
+            resetTrigger={resetUploadTrigger}
+            accept={['jpg','png','jpeg','web2','svg']}
+          />
+        )}
       </div>
     </Flex>
   );
