@@ -1,4 +1,3 @@
-import { radixThemePreset } from 'radix-themes-tw'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -19,6 +18,9 @@ const config: Config = {
       },
       gridTemplateColumns:{
         'header':'1fr 100px'
+      },
+      maxWidth:{
+        'max-w-260':'260px'
       }
     },
   },

@@ -2,12 +2,13 @@
 import { IUploadFile } from "@/app/types/general";
 import { Button, Flex } from "@radix-ui/themes";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FC } from "react";
 import UploadButton from "../uploadButton/UploadButton";
 import defaultImg from './../../../public/default-picture.png'
 import { getValidText } from "@/app/services/get-validText";
+import { ITrackPhoneProps } from "./types";
 
-const TrackPhone = () => {
+const TrackPhone:FC<ITrackPhoneProps> = ({onChange}) => {
   const [resetUploadTrigger, setResetUploadTrigger] = useState(1);
   const [file, setFile] = useState<IUploadFile>({} as IUploadFile);
   const buttonRef = useRef<HTMLInputElement>();
@@ -18,13 +19,13 @@ const TrackPhone = () => {
 
   const uploadHandler = (data: IUploadFile) => {
     setFile(data);
-    // onChange && onChange(data);
+    onChange(data?.file ? data?.file : null);
   };
 
   const deleteHandler = () => {
     setResetUploadTrigger((prev) => prev + 1);
     setFile({} as IUploadFile);
-    // onChange && onChange(null);
+    onChange && onChange(null);
   };
 
   const openProviderHandler = () => {

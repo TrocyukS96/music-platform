@@ -1,10 +1,12 @@
 'use client'
 import * as Toast from '@radix-ui/react-toast';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { convertBase64 } from '@/app/services/convertBase64';
 import { IUPlodButtonProps } from './types';
 import { IUploadFile } from '@/app/types/general';
 import { Button } from '@radix-ui/themes';
+import Image from 'next/image';
+import { getValidText } from '@/app/services/get-validText';
 
 const UploadButton: FC<IUPlodButtonProps> = (props) => {
   const { title, onChange, resetTrigger, accept, buttonType, externalRef } =
@@ -26,7 +28,8 @@ const UploadButton: FC<IUPlodButtonProps> = (props) => {
         data: data?.data,
         name: fileData?.name?.split('.')[0],
         extension: fileData?.name?.split('.')[1],
-        view: data?.view
+        view: data?.view,
+        file:fileData
       };
       if (accept) {
         if (accept?.includes(fileData?.name?.split('.')[1])) {
@@ -47,7 +50,8 @@ const UploadButton: FC<IUPlodButtonProps> = (props) => {
     }
   };
 
-  const btnHandler = () => {
+  const btnHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     if (ref && ref?.current) {
       ref?.current?.click();
     }
@@ -88,7 +92,7 @@ const UploadButton: FC<IUPlodButtonProps> = (props) => {
       >
         {title}
       </Button>
-      <img src={file?.view} alt="" />
+      <Image src={getValidText(file?.view)} alt="" />
     </div>
   );
 };

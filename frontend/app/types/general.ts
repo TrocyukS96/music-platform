@@ -3,4 +3,5 @@ export interface IUploadFile {
   name?: string;
   extension?: string;
   view?: string;
+  file?:File | null
 }
