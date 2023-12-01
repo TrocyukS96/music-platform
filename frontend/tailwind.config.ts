@@ -17,7 +17,9 @@ const config: Config = {
         'content-height':'calc(100vh - 48px);'
       },
       gridTemplateColumns:{
-        'header':'1fr 100px'
+        'header':'1fr 100px',
+        'track-progress':'1fr auto',
+        'player':'20% 1fr 20%'
       },
       maxWidth:{
         'max-w-260':'260px'

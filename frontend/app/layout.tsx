@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
 import Header from "./components/header/Header";
+import Player from "./components/player/Player";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +23,16 @@ export default function RootLayout({
     <html lang="en">
         <body className={`${inter.className} h-screen`}>
         <Theme appearance="light">
-          <Flex gap="3" width={"100%"} className="h-screen">
+          <Flex width={"100%"} className="h-screen">
             <Navbar />
             <div className="w-full">
               <Header />
               <main className="p-2 bg-stone-100 h-content-height">
                 {children}
               </main>
+              
             </div>
+            <Player/>
           </Flex>
           </Theme>
         </body>
