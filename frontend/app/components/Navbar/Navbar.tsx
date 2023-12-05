@@ -19,6 +19,20 @@ const pathNames = [
 
 const Navbar = () => {
   const currentPath = usePathname();
+  console.log(currentPath,'--curentpath')
+  console.log(currentPath.split('/'),'--curentpath')
+
+  const showActive = (href:string) =>{
+    const hrefArr = href.split('/')
+    const currentPathArr =currentPath.split('/')
+    if(href==='/' && href===currentPath){
+      return true
+    }else{
+      if(currentPathArr.includes('tracks') && hrefArr.includes('tracks')){
+        return true
+      }else return false
+    }
+  }
   return (
     <div className="w-60 p-2 bg-neutral-900 p-x-1">
       <Flex align="center" gap="3" justify="between">
@@ -35,7 +49,7 @@ const Navbar = () => {
               "hover:bg-slate-300": true,
               "transition-all": true,
               "transition-duration:150ms": true,
-              'bg-slate-300':el.href===currentPath,
+              'bg-slate-300':showActive(el.href),
             })}
           >
             <Link href={el.href} className="text-white">
